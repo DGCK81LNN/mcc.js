@@ -87,10 +87,12 @@ export class MccJsClient {
         // Send a disconnection signal so we do not get an exception message from the WebSocketSharp library used by the MCC
         // Currenlty only works for node
         if (global !== undefined && global.process != undefined) {
-            process.on('exit', this.handleKillSignal.bind(this));
+            // TODO: Commented this out for now because it seems to silence all uncaught exceptions. Better fix?
+            // process.on('exit', this.handleKillSignal.bind(this));
             process.on('SIGINT', this.handleKillSignal.bind(this));
-            process.on('SIGUSR1', this.handleKillSignal.bind(this));
-            process.on('SIGUSR2', this.handleKillSignal.bind(this));
+            process.on('SIGTERM', this.handleKillSignal.bind(this));
+            // process.on('SIGUSR1', this.handleKillSignal.bind(this));
+            // process.on('SIGUSR2', this.handleKillSignal.bind(this));
         }
     }
 
