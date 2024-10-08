@@ -368,6 +368,12 @@ export class SendPlaceBlockCommand extends Command {
     }
 }
 
+export class SendPrivateMessageCommand extends Command {
+    constructor(public player: string, public message: string) {
+        super("SendPrivateMessage");
+    }
+}
+
 export class SetSlotCommand extends Command {
     constructor(public slotId: number) {
         super("SetSlot");

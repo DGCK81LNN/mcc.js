@@ -52,6 +52,7 @@ import {
     CreativeDeleteCommand,
     SendAnimationCommand,
     SendPlaceBlockCommand,
+    SendPrivateMessageCommand,
     UseItemInHandCommand,
     GetInventoryEnabledCommand,
     GetPlayerInventoryCommand,
@@ -483,6 +484,10 @@ export class ChatBot {
             location.z,
             direction,
             hand));
+    }
+
+    protected async SendPrivateMessage(player: string, message: string): Promise<boolean> {
+        return await this.sendCommand<boolean>(new SendPrivateMessageCommand(player, message));
     }
 
     protected async UseItemInHand(): Promise<boolean> {

@@ -19,7 +19,7 @@ class TestChatBot extends ChatBot {
 
     async OnChatPrivate(username, message, rawText) {
         this.info(`[CHAT][Private Message] ${username}: ${message}`);
-        await this.send(`/msg ${username} Echo: ${message}`);
+        await this.SendPrivateMessage(username, `Echo: ${message}`);
     }
 
     async OnChatRaw(text, json) {
