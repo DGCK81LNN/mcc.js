@@ -1,19 +1,28 @@
 {
-  "name": "mcc.js",
+  "name": "@dgck81lnn/mccjs",
   "version": "1.0.0",
+  "files": [
+    "lib",
+    "dist"
+  ],
   "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "description": "A JavaScript API for making Chat Bots for Minecraft Console Client (MCC) which uses Web Sockets under the hood.",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && esbuild src/index.ts --bundle --sourcemap --format=esm --external:ws --outfile=lib/index.js && esbuild src/index.ts --bundle --sourcemap --format=cjs --external:ws --outfile=lib/index.cjs"
   },
   "author": "Milutinke",
-  "license": "LGPL-2.0-only",
+  "license": "LGPL-3.0-only",
   "devDependencies": {
-    "typescript": "^4.8.2"
+    "@types/ws": "^8.5.3",
+    "esbuild": "^0.24.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.6.2"
   },
   "dependencies": {
-    "@types/ws": "^8.5.3",
-    "ts-node": "^10.9.1",
     "ws": "^8.9.0"
-  }
+  },
+  "packageManager": "yarn@4.2.2"
 }

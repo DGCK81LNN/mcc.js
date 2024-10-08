@@ -1,76 +1,81 @@
-import { Entity } from './MccTypes/Entity.js';
-import { Item, ItemType } from './MccTypes/Item.js';
-import Location from './MccTypes/Location.js';
-import MccJsClient from './index.js';
-import Command from './Commands/Contract/Command.js';
-import DigBlockCommand from './Commands/DigBlockCommand.js';
-import GetEntitiesCommand from './Commands/GetEntitiesCommand.js';
-import GetEntityHandlingEnabledCommand from './Commands/GetEntityHandlingEnabledCommand.js';
-import GetPlayersLatencyCommand from './Commands/GetPlayersLatencyCommand.js';
-import GetTerrainEnabledCommand from './Commands/GetTerrainEnabledCommand.js';
-import GetWorldCommand from './Commands/GetWorldCommand.js';
-import LogDebugToConsoleCommand from './Commands/LogDebugToConsoleCommand.js';
-import LogDebugToConsoleTranslatedCommand from './Commands/LogDebugToConsoleTranslatedCommand.js';
-import LogToConsoleCommand from './Commands/LogToConsoleCommand.js';
-import LogToConsoleTranslatedCommand from './Commands/LogToConsoleTranslatedCommand.js';
-import ReconnectToTheServerCommand from './Commands/ReconnectToTheServerCommand.js';
-import RunScriptCommand from './Commands/RunScriptCommand.js';
-import SendEntityActionCommand from './Commands/SendEntityActionCommand.js';
-import SetSlotCommand from './Commands/SetSlotCommand.js';
-import SetTerrainEnabledCommand from './Commands/SetTerrainEnabledCommand.js';
-import SneakCommand from './Commands/SneakCommand.js';
-import EntityActionType from './MccTypes/EntityActionType.js';
-import DisconnectAndExitCommand from './Commands/DisconnectAndExitCommand.js';
-import GetCurrentLocationCommand from './Commands/GetCurrentLocationCommand.js';
-import MoveToLocationCommand from './Commands/MoveToLocationCommand.js';
-import ClientIsMovingCommand from './Commands/ClientIsMovingCommand.js';
-import LookAtLocationCommand from './Commands/LookAtLocationCommand.js';
-import GetTimestampCommand from './Commands/GetTimestampCommand.js';
-import GetServerPortCommand from './Commands/GetServerPortCommand.js';
-import GetServerHostCommand from './Commands/GetServerHostCommand.js';
-import GetUsernameCommand from './Commands/GetUsernameCommand.js';
-import GetGamemodeCommand from './Commands/GetGamemodeCommand.js';
-import GetYawCommand from './Commands/GetYawCommand.js';
-import GetPitchCommand from './Commands/GetPitchCommand.js';
-import GetUserUUIDCommand from './Commands/GetUserUUIDCommand.js';
-import GetOnlinePlayersCommand from './Commands/GetOnlinePlayersCommand.js';
-import GetOnlinePlayersWithUUIDCommand from './Commands/GetOnlinePlayersWithUUIDCommand.js';
-import GetServerTPSCommand from './Commands/GetServerTPSCommand.js';
-import InteractType from './MccTypes/InteractType.js';
-import Hand from './MccTypes/Hand.js';
-import InteractEntityCommand from './Commands/InteractEntityCommand.js';
-import CreativeGiveCommand from './Commands/CreativeGiveCommand.js';
-import CreativeDeleteCommand from './Commands/CreativeDeleteCommand.js';
-import SendAnimationCommand from './Commands/SendAnimationCommand.js';
-import Direction from './MccTypes/Direction.js';
-import SendPlaceBlockCommand from './Commands/SendPlaceBlockCommand.js';
-import UseItemInHandCommand from './Commands/UseItemInHandCommand.js';
-import GetInventoryEnabledCommand from './Commands/GetInventoryEnabledCommand.js';
-import GetPlayerInventoryCommand from './Commands/GetPlayerInventoryCommand.js';
-import GetInventoriesCommand from './Commands/GetInventoriesCommand.js';
-import WindowActionType from './MccTypes/WindowActionType.js';
-import WindowActionCommand from './Commands/WindowActionCommand.js';
-import ChangeSlotCommand from './Commands/ChangeSlotCommand.js';
-import GetCurrentSlotCommand from './Commands/GetCurrentSlotCommand.js';
-import ClearInventoriesCommand from './Commands/ClearInventoriesCommand.js';
-import UpdateSignCommand from './Commands/UpdateSignCommand.js';
-import CommandBlockMode from './MccTypes/CommandBlockMode.js';
-import CommandBlockFlags from './MccTypes/CommandBlockFlags.js';
-import SelectTradeCommand from './Commands/SelectTradeCommand.js';
-import UpdateCommandBlockCommand from './Commands/UpdateCommandBlockCommand.js';
-import CloseInventoryCommand from './Commands/CloseInventoryCommand.js';
-import GetMaxChatMessageLengthCommand from './Commands/GetMaxChatMessageLengthCommand.js';
-import RespawnCommand from './Commands/RespawnCommand.js';
-import GetProtocolVersionCommand from './Commands/GetProtocolVersionCommand.js';
-import ProtocolVersion from './MccTypes/ProtocolVersion.js';
-import MapIcon from './MccTypes/MapIcon.js';
+import {
+    Entity,
+    Item,
+    ItemType,
+    Location,
+    EntityActionType,
+    InteractType,
+    Hand,
+    Direction,
+    WindowActionType,
+    CommandBlockMode,
+    CommandBlockFlags,
+    ProtocolVersion,
+    MapIcon
+} from './MccTypes';
+import {
+    Command,
+    DigBlockCommand,
+    GetEntitiesCommand,
+    GetEntityHandlingEnabledCommand,
+    GetPlayersLatencyCommand,
+    GetTerrainEnabledCommand,
+    GetWorldCommand,
+    LogDebugToConsoleCommand,
+    LogDebugToConsoleTranslatedCommand,
+    LogToConsoleCommand,
+    LogToConsoleTranslatedCommand,
+    ReconnectToTheServerCommand,
+    RunScriptCommand,
+    SendEntityActionCommand,
+    SetSlotCommand,
+    SetTerrainEnabledCommand,
+    SneakCommand,
+    DisconnectAndExitCommand,
+    GetCurrentLocationCommand,
+    MoveToLocationCommand,
+    ClientIsMovingCommand,
+    LookAtLocationCommand,
+    GetTimestampCommand,
+    GetServerPortCommand,
+    GetServerHostCommand,
+    GetUsernameCommand,
+    GetGamemodeCommand,
+    GetYawCommand,
+    GetPitchCommand,
+    GetUserUUIDCommand,
+    GetOnlinePlayersCommand,
+    GetOnlinePlayersWithUUIDCommand,
+    GetServerTPSCommand,
+    InteractEntityCommand,
+    CreativeGiveCommand,
+    CreativeDeleteCommand,
+    SendAnimationCommand,
+    SendPlaceBlockCommand,
+    UseItemInHandCommand,
+    GetInventoryEnabledCommand,
+    GetPlayerInventoryCommand,
+    GetInventoriesCommand,
+    WindowActionCommand,
+    ChangeSlotCommand,
+    GetCurrentSlotCommand,
+    ClearInventoriesCommand,
+    UpdateSignCommand,
+    SelectTradeCommand,
+    UpdateCommandBlockCommand,
+    CloseInventoryCommand,
+    GetMaxChatMessageLengthCommand,
+    RespawnCommand,
+    GetProtocolVersionCommand
+} from "./Commands";
+import { MccJsClient } from './MccJsClient';
 
-interface CommandResponse {
+export interface CommandResponse {
     requestId: string;
     result: any
 }
 
-class ChatBot {
+export class ChatBot {
     protected client?: MccJsClient;
     private responseQueue: Record<string, CommandResponse> = {};
     private promises: Record<string, { resolve: (value: unknown) => void, reject: (reason?: any) => void }> = {};
@@ -621,5 +626,3 @@ class ChatBot {
     protected async OnPlayerStatus(statusId: number): Promise<void> { }
     protected async OnNetworkPacket(packetId: number, isLogin: boolean, isInbound: boolean, packetData: any): Promise<void> { }
 };
-
-export default ChatBot;

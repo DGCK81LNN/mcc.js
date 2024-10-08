@@ -1,4 +1,201 @@
-enum ItemType {
+export enum CommandBlockFlags {
+    TrackOutput = 0x01,
+    IsConditional = 0x02,
+    Automatic = 0x04,
+}
+
+export enum CommandBlockMode {
+    Sequence = 0,
+    Auto = 1,
+    Redstone = 2,
+}
+
+export enum Direction {
+    South = 0,
+    West = 1,
+    North = 2,
+    East = 3,
+
+    Up = 4,
+    Down = 5,
+
+    NorthEast = 6,
+    SouthEast = 7,
+    SouthWest = 8,
+    NorthWest = 9,
+}
+
+export enum EntityType {
+    AreaEffectCloud,
+    ArmorStand,
+    Arrow,
+    Axolotl,
+    Bat,
+    Bee,
+    Blaze,
+    Boat,
+    Cat,
+    CaveSpider,
+    ChestMinecart,
+    Chicken,
+    Cod,
+    CommandBlockMinecart,
+    Cow,
+    Creeper,
+    Dolphin,
+    Donkey,
+    DragonFireball,
+    Drowned,
+    Egg,
+    ElderGuardian,
+    EndCrystal,
+    EnderDragon,
+    Enderman,
+    Endermite,
+    EnderPearl,
+    Evoker,
+    EvokerFangs,
+    ExperienceBottle,
+    ExperienceOrb,
+    EyeOfEnder,
+    FallingBlock,
+    Fireball,
+    FireworkRocket,
+    FishingBobber,
+    Fox,
+    FurnaceMinecart,
+    Ghast,
+    Giant,
+    GlowItemFrame,
+    GlowSquid,
+    Goat,
+    Guardian,
+    Hoglin,
+    HopperMinecart,
+    Horse,
+    Husk,
+    Illusioner,
+    IronGolem,
+    Item,
+    ItemFrame,
+    LeashKnot,
+    LightningBolt,
+    Llama,
+    LlamaSpit,
+    MagmaCube,
+    Marker,
+    Minecart,
+    Mooshroom,
+    Mule,
+    Ocelot,
+    Painting,
+    Panda,
+    Parrot,
+    Phantom,
+    Pig,
+    Piglin,
+    PiglinBrute,
+    Pillager,
+    Player,
+    PolarBear,
+    Potion,
+    Pufferfish,
+    Rabbit,
+    Ravager,
+    Salmon,
+    Sheep,
+    Shulker,
+    ShulkerBullet,
+    Silverfish,
+    Skeleton,
+    SkeletonHorse,
+    Slime,
+    SmallFireball,
+    Snowball,
+    SnowGolem,
+    SpawnerMinecart,
+    SpectralArrow,
+    Spider,
+    Squid,
+    Stray,
+    Strider,
+    Tnt,
+    TntMinecart,
+    TraderLlama,
+    Trident,
+    TropicalFish,
+    Turtle,
+    Vex,
+    Villager,
+    Vindicator,
+    WanderingTrader,
+    Witch,
+    Wither,
+    WitherSkeleton,
+    WitherSkull,
+    Wolf,
+    Zoglin,
+    Zombie,
+    ZombieHorse,
+    ZombieVillager,
+    ZombifiedPiglin,
+}
+
+export enum EntityPose {
+    Standing = 0,
+    FallFlying = 1,
+    Sleeping = 2,
+    Swimming = 3,
+    SpinAttack = 4,
+    Sneaking = 5,
+    Dying = 6,
+};
+
+export type Entity = {
+    ID: number,
+    UUID: string,
+    Name?: string,
+    CustomNameJson: string,
+    IsCustomNameVisible: boolean,
+    CustomName: string,
+    Latency: number,
+    Type: EntityType,
+    Location: Location,
+    Yaw: number,
+    Pitch: number,
+    ObjectData: number,
+    Health: number,
+    Item: Item,
+    Pose: EntityPose,
+    Metadata: any,
+    Equipment: any,
+
+};
+
+export enum EntityActionType {
+    StartSneaking = 0,
+    StopSneaking = 1,
+    LeaveBed = 2,
+    StartSprinting = 3,
+    StopSprinting = 4,
+    StartJumpWithHorse = 5,
+    StopJumpWithHorse = 6,
+    OpenHorseInventory = 7,
+    StartFlyingWithElytra = 8,
+}
+
+export enum Hand {
+    MainHand = 0,
+    OffHand = 1,
+}
+
+export enum InteractType {
+    Interact = 0,
+    Attack,
+    InteractAt
+}
+
+export enum ItemType {
     Unknown = -2, // Unsupported item type (Forge mod custom item...)
     Null = -1,    // Unspecified item type (Used in the network protocol)
 
@@ -1105,10 +1302,158 @@ enum ItemType {
     ZombifiedPiglinSpawnEgg,
 }
 
-type Item = {
+export type Item = {
     ItemType: ItemType;
     Count: number;
     NBT?: any
 };
 
-export { ItemType, Item };
+export type Location = {
+    x: number,
+    y: number,
+    z: number
+};
+
+export class MapIcon {
+    constructor(
+        public type: MapIconType,
+        public x: number,
+        public z: number,
+        public direction: number,
+        public displayName: string
+    ) { }
+}
+
+export enum MapIconType {
+    White_Arrow = 0,
+    Green_Arrow,
+    Red_Arrow,
+    Blue_Arrow,
+    White_Cross,
+    Red_Pointer,
+    White_Circle,
+    Small_White_Circle,
+    Mansion,
+    Temple,
+    White_Banner,
+    Orange_Banner,
+    Magenta_Banner,
+    Light_Blue_Banner,
+    Yellow_Banner,
+    Lime_Banner,
+    Pink_Banner,
+    Gray_Banner,
+    Light_Gray_Banner,
+    Cyan_Banner,
+    Purple_Banner,
+    Blue_Banner,
+    Brown_Banner,
+    Green_Banner,
+    Red_Banner,
+    Black_Banner,
+    Treasure_Marker
+}
+
+export enum ProtocolVersion {
+    MC_1_8_Version = 47,
+    MC_1_9_Version = 107,
+    MC_1_9_1_Version = 108,
+    MC_1_10_Version = 210,
+    MC_1_11_2_Version = 316,
+    MC_1_12_Version = 335,
+    MC_1_12_2_Version = 340,
+    MC_1_13_Version = 393,
+    MC_1_13_2_Version = 404,
+    MC_1_14_Version = 477,
+    MC_1_15_Version = 573,
+    MC_1_15_2_Version = 578,
+    MC_1_16_Version = 735,
+    MC_1_16_1_Version = 736,
+    MC_1_16_2_Version = 751,
+    MC_1_16_3_Version = 753,
+    MC_1_16_5_Version = 754,
+    MC_1_17_Version = 755,
+    MC_1_17_1_Version = 756,
+    MC_1_18_1_Version = 757,
+    MC_1_18_2_Version = 758,
+    MC_1_19_Version = 759,
+    MC_1_19_2_Version = 760
+}
+
+export enum WindowActionType {
+    /// <summary>
+    /// Left click with mouse on a slot: grab or drop a whole item stack
+    /// </summary>
+    LeftClick,
+
+    /// <summary>
+    /// Right click with mouse on a slot: grab half a stack or drop a single item
+    /// </summary>
+    RightClick,
+
+    /// <summary>
+    /// Middle click with mouse on a slot: grab a full stack from creative inventory
+    /// </summary>
+    MiddleClick,
+
+    /// <summary>
+    /// Shift+Left click with mouse on a slot: send a whole item stack to the hotbar or other inventory
+    /// </summary>
+    ShiftClick,
+
+    /// <summary>
+    /// Drop a single item on ground
+    /// </summary>
+    DropItem,
+
+    /// <summary>
+    /// Drop a whole item stack on ground
+    /// </summary>
+    DropItemStack,
+
+    /// <summary>
+    /// Start hovering slots with left button pressed: Distribute evenly the stack on hovered slots
+    /// </summary>
+    StartDragLeft,
+
+    /// <summary>
+    /// Start hovering slots with right button pressed: Drop one item on each hovered slot
+    /// </summary>
+    StartDragRight,
+
+    /// <summary>
+    /// Start hovering slots with middle button pressed: Create one item stack on each hovered slot in creative mode
+    /// </summary>
+    StartDragMiddle,
+
+    /// <summary>
+    /// Hover a slot to distribute evenly an item stack
+    /// </summary>
+    AddDragLeft,
+
+    /// <summary>
+    /// Hover a slot to drop one item from an item stack
+    /// </summary>
+    AddDragRight,
+
+    /// <summary>
+    /// Hover a slot to create one item stack in creative mode
+    /// </summary>
+    AddDragMiddle,
+
+    /// <summary>
+    /// Stop hovering slots with left button pressed
+    /// </summary>
+    EndDragLeft,
+
+    /// <summary>
+    /// Stop hovering slots with right button pressed
+    /// </summary>
+    EndDragRight,
+
+    /// <summary>
+    /// Stop hovering slots with middble button pressed
+    /// </summary>
+    EndDragMiddle,
+}
+

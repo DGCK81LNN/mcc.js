@@ -1,6 +1,4 @@
-import MccJsClient from "./dist/index.js";
-import ChatBot from "./dist/ChatBot.js";
-import LogLevel from "./dist/Logging/Contract/LogLevels.js";
+import { MccJsClient, ChatBot, Logging } from "./lib/index.js";
 
 class TestChatBot extends ChatBot {
     async OnInitialize() {
@@ -167,7 +165,7 @@ const client = new MccJsClient({
     port: 8043,
     password: "wspass12345",
     loggingEnabled: true,
-    logLevels: LogLevel.Info | LogLevel.Warn | LogLevel.Error,
+    logLevels: Logging.LogLevel.Info | Logging.LogLevel.Warn | Logging.LogLevel.Error,
     chatBot: new TestChatBot(),
     sessionName: "Test Chat Bot",
     reconnect: true,
